@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stampa Numeri con Percentuale</title>
+</head>
+<body>
 
+<h2>Inserisci un numero e premi il pulsante:</h2>
+<input type="text" id="numeroInput" placeholder="Inserisci un numero">
+<button onclick="stampaNumeri()">Stampa Numeri</button>
+
+<script>
+function stampaNumeri() {
+    // Ottieni il valore dell'input
+    var inputElement = document.getElementById("numeroInput");
+    var numeroInput = parseInt(inputElement.value);
+
+    // Verifica se l'input è un numero valido
+    if (!isNaN(numeroInput) && numeroInput > 0) {
+        // Ottieni l'elemento dove mostrare i numeri
+        var risultatoElement = document.getElementById("risultato");
+
+        // Resetta l'elemento
+        risultatoElement.innerHTML = "";
+
+        // Stampa i numeri da 1 a numeroInput
+        for (var i = 1; i <= numeroInput; i++) {
+            risultatoElement.innerHTML += i + "<br>";
+        }
+
+        // Calcola e stampa il 10% del numeroInput
+        var percentuale = parseInt(numeroInput * 0.1);
+        risultatoElement.innerHTML += "<br>Il 10% di " + numeroInput + " è " + percentuale;
+    } else {
+        alert("Inserisci un numero intero positivo valido.");
+    }
+}
+</script>
+
+<div id="risultato"></div>
+
+</body>
+</html>
