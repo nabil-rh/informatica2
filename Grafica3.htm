@@ -1,1 +1,41 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .square {
+            width: 10px;
+            height: 10px;
+            margin: 2px;
+            display: inline-block;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 10px;
+            font-size: 8px;
+        }
+        .light-gray {
+            background-color: #9c9c9c;
+        }
+        .dark-gray {
+            background-color: #828282;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tbody>
+            <script>
+                for (let i = 1; i <= 100; i++) {
+                    if (i % 2 === 0) {
+                        document.write('<div class="square light-gray">' + i + '</div>');
+                    } else {
+                        document.write('<div class="square dark-gray">' + i + '</div>');
+                    }
+                    if (i % 10 === 0) {
+                        document.write('<br>');
+                    }
+                }
+            </script>
+        </tbody>
+    </table>
+</body>
+</html>
