@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore IMC</title>
+    <style>
+        body {
+            background-color: red; /* Imposta il colore di sfondo a rosso */
+        }
+
+        /* Definisci lo stile dei riquadri attorno alle etichette e agli input */
+        label, input {
+            display: block; /* Imposta gli elementi come blocchi per far sì che abbiano larghezza completa */
+            border: 1px solid black; /* Aggiungi un bordo nero di 1px */
+            padding: 5px; /* Aggiungi spazio interno al riquadro */
+            margin-bottom: 10px; /* Aggiungi margine inferiore per separare gli elementi */
+        }
+    </style>
+</head>
+<body>
+    <h1>Calcolatore IMC</h1>
+    <label for="weight">Inserisci il tuo peso in kg:</label>
+    <input type="number" id="weight" step="0.01">
+    <br>
+    <label for="height">Inserisci la tua altezza in metri:</label>
+    <input type="number" id="height" step="0.01">
+    <br>
+    <button onclick="calculateIMC()">Calcola IMC</button>
+    <p id="result"></p>
+
+    <script>
+        function calculateIMC() {
+            const weight = parseFloat(document.getElementById("weight").value);
+            const height = parseFloat(document.getElementById("height").value);
+
+            if (isNaN(weight) || isNaN(height) || height <= 0) {
+                document.getElementById("result").textContent = "Inserisci valori validi per peso e altezza.";
+                return;
+            }
+
+            const bmi = weight / (height ** 2);
+
+            let classification;
+            if (bmi < 18.5) {
+                classification = "Sottopeso";
+            } else if (bmi < 25) {
+                classification = "Normopeso";
+            } else if (bmi < 30) {
+                classification = "Sovrappeso";
+            } else {
+                classification = "Obesità";
+            }
+
+            document.getElementById("result").textContent = `Il tuo IMC è ${bmi.toFixed(2)}. Classificazione: ${classification}`;
+        }
+    </script>
+</body>
+</html>
