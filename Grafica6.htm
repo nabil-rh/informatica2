@@ -1,0 +1,25 @@
+<button class="button" id="button2">Incrementa di 3</button>
+<button class="button" id="button3">Incrementa di 7</button>
+<div id="output"></div>
+
+<script>
+    // Funzione per gestire l'incremento e l'output
+    function handleIncrement(buttonId, incrementBy) {
+        const button = document.getElementById(buttonId);
+        let counter = 0;
+
+        button.addEventListener("click", function() {
+            counter += incrementBy;
+            document.getElementById("output").textContent = `Valore: ${counter}`;
+        });
+    }
+
+    // Chiamata alla funzione per gestire l'incremento di 2 al click
+    handleIncrement("button1", 2);
+    // Chiamata alla funzione per gestire l'incremento di 3 al click
+    handleIncrement("button2", 3);
+    // Chiamata alla funzione per gestire l'incremento di 7 al click
+    handleIncrement("button3", 7);
+</script>
+</body>
+</html>
