@@ -3,44 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inserimento di numeri in un array</title>
+    <title>Conteggio Numeri Primi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        p {
+            margin: 0;
+            padding: 5px 0;
+        }
+    </style>
 </head>
 <body>
-
-    <div>
-        <p id="out"></p>
-    </div>
-
+    <h1>Conteggio dei Numeri Primi</h1>
+    <div id="output"></div>
 
     <script>
-        let arrayNumeriInteri=[];
-        //CaricaArray();
-        let output = document.getElementById("out");
-        for(let numero=1;numero<=100;numero++)
-        {
-            let divisoriNumero=Divisori(numero);
-            output.innerHTML += "Divisori di "+ numero+ ": "+divisoriNumero.join(" ") + "<br>";
-        }
-        function CaricaArray()
-        {for(let i =0;i<1000;i++)
-            {arrayNumeriInteri.push(n);
-            }
-            console.log(arrayNumeriInteri)
+        let arrayNumeriPrimi = [];
+
+        for (let i = 0; i < 10000; i += 100) {
+            countPrimesInRange(i, i + 100);
         }
 
-     function Divisori(n){
-        let divisori=[];
-        let sqrtN = Math.sqrt(n);
-        for(let i = 1; i <= sqrtN; i++) {
-            if (n % i === 0) {
-                divisori.push(i);
-                if (i !== n / i) {
-                    divisori.push(n / i);
+        function countPrimesInRange(start, end) {
+            let count = 0;
+            for (let number = start; number < end; number++) {
+                if (isPrime(number)) {
+                    count++;
+                    arrayNumeriPrimi.push(number);
                 }
             }
+            displayResult(start, end, count);
         }
-       return divisori.sort((a, b) => a - b);
-     }
+
+        function isPrime(num) {
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+            if (num % 2 === 0 || num % 3 === 0) return false;
+            for (let i = 5; i * i <= num; i += 6) {
+                if (num % i === 0 || num % (i + 2) === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function displayResult(start, end, count) {
+            let outputDiv = document.getElementById("output");
+            let resultString = `Numeri primi tra ${start} e ${end - 1}: ${count}`;
+            outputDiv.innerHTML += `<p>${resultString}</p>`;
+        }
     </script>
 </body>
 </html>
