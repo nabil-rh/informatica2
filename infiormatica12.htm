@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserimento di numeri in un array</title>
+</head>
+<body>
+
+    <div>
+        <p id="out"></p>
+    </div>
+
+
+    <script>
+        let arrayNumeriInteri=[];
+        //CaricaArray();
+        let output = document.getElementById("out");
+        for(let numero=1;numero<=100;numero++)
+        {
+            let divisoriNumero=Divisori(numero);
+            output.innerHTML += "Divisori di "+ numero+ ": "+divisoriNumero.join(" ") + "<br>";
+        }
+        function CaricaArray()
+        {for(let i =0;i<1000;i++)
+            {arrayNumeriInteri.push(n);
+            }
+            console.log(arrayNumeriInteri)
+        }
+
+     function Divisori(n){
+        let divisori=[];
+        let sqrtN = Math.sqrt(n);
+        for(let i = 1; i <= sqrtN; i++) {
+            if (n % i === 0) {
+                divisori.push(i);
+                if (i !== n / i) {
+                    divisori.push(n / i);
+                }
+            }
+        }
+       return divisori.sort((a, b) => a - b);
+     }
+    </script>
+</body>
+</html>
