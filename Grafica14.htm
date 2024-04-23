@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calcolo Numeri</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    .results {
+        margin-top: 20px;
+    }
+    p {
+        margin: 10px 0;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Risultati</h1>
+    <div class="results">
+        <p><strong>Numeri primi:</strong> <span id="primes"></span></p>
+        <p><strong>Numeri pari:</strong> <span id="evens"></span></p>
+        <p><strong>Numeri dispari:</strong> <span id="odds"></span></p>
+        <p><strong>Successivi dei numeri primi:</strong> <span id="nextPrimes"></span></p>
+        <p><strong>Numero di successivi primi pari:</strong> <span id="countEven"></span></p>
+        <p><strong>Numero di successivi primi ancora primi:</strong> <span id="countPrime"></span></p>
+    </div>
+</div>
+
+<script>
+function isPrime(num) {
+    if (num <= 1) return false;
+    if (num <= 3) return true;
+    if (num % 2 === 0 || num % 3 === 0) return false;
+
+    let i = 5;
+    while (i * i <= num) {
+        if (num % i === 0 || num % (i + 2) === 0) return false;
+        i += 6;
+    }
+
+    return true;
+}
+
+function getPrimes() {
+    const primes = [];
+    for (let i = 1; i <= 1000; i++) {
+        if (isPrime(i)) {
+            primes.push(i);
+        }
+    }
+    return primes;
+}
+
+function getEvenNumbers() {
+    const evens = [];
+    for (let i = 2; i <= 1000; i += 2) {
+        evens.push(i);
+    }
+    return evens;
+}
+
+function getOddNumbers() {
+    const odds = [];
+    for (let i = 1; i <= 1000; i += 2) {
+        odds.push(i);
+    }
+    return odds;
+}
+
+function getNextPrimes(primes) {
+    const nextPrimes = [];
+    let countEven = 0;
+    let countPrime = 0;
+
+    for (let i = 0; i < primes.length; i++) {
+        const next = primes[i] + 1;
+        nextPrimes.push(next);
+        if (next % 2 === 0) {
+            countEven++;
+        } else if (isPrime(next)) {
+            countPrime++;
+        }
+    }
+
+    return { nextPrimes, countEven, countPrime };
+}
+
+const primes = getPrimes();
+const evens = getEvenNumbers();
+const odds = getOddNumbers();
+const { nextPrimes, countEven, countPrime } = getNextPrimes(primes);
+
+document.getElementById('primes').innerText = primes.join(', ');
+document.getElementById('evens').innerText = evens.join(', ');
+document.getElementById('odds').innerText = odds.join(', ');
+document.getElementById('nextPrimes').innerText = nextPrimes.join(', ');
+document.getElementById('countEven').innerText = countEven;
+document.getElementById('countPrime').innerText = countPrime;
+</script>
+</body>
+</html>
