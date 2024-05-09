@@ -1,102 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quadrati Numerici</title>
 <style>
-    .quadratoRed {
-      background-color: rgb(239, 143, 126);
-      color: rgb(3, 0, 0);
-      border: 2px solid black;
-      margin: 20px;
-      height: 20px;
-      width: 20px;
-      padding: 5px;
-    }
-    .quadratoBlue {
-      background-color: rgb(97, 119, 244);
-      color: rgb(6, 0, 0);
-      border: 2px solid black;
-      margin: 20px;
-      height: 20px;
-      width: 20px;
-      padding: 5px;
-    }
-    .quadratoGreen {
-      background-color: rgb(144, 238, 144);
-      color: rgb(3, 0, 0);
-      border: 2px solid black;
-      margin: 20px;
-      height: 20px;
-      width: 20px;
-      padding: 5px;
-    }
-    .quadratoYellow {
-      background-color: rgb(255, 255, 0);
-      color: rgb(3, 0, 0);
-      border: 2px solid black;
-      margin: 20px;
-      height: 20px;
-      width: 20px;
-      padding: 5px;
-    }
+  /* Stile dei quadrati numerici */
+  .square {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    display: inline-block;
+    margin: 5px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%; /* Bordo curvo per fare dei quadrati curvi */
+  }
+  .red-dark {
+    background-color: #8B0000; /* Rosso scuro */
+  }
+  .blue-light {
+    background-color: #ADD8E6; /* Blu chiaro */
+  }
+  .green {
+    background-color: #00FF00; /* Verde */
+  }
+  .yellow {
+    background-color: #FFFF00; /* Giallo */
+  }
+  
+  /* Stile del bottone */
+  .custom-button {
+    padding: 10px 20px;
+    background-color: transparent;
+    border: 2px solid #00FF00; /* Bordo rettangolare verde */
+    border-radius: 10px; /* Bordo curvo */
+    color: #00FF00; /* Colore del testo verde */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Stile del bottone al passaggio del mouse */
+  .custom-button:hover {
+    background-color: #00FF00; /* Cambia colore di sfondo a verde */
+    color: #FFFFFF; /* Cambia colore del testo a bianco */
+  }
 </style>
-
 </head>
 <body>
-<div id="container" style="display: flex;"></div>
+<div id="container"></div>
+<button class="custom-button" onclick="generateSquares()">Genera Quadrati</button> <!-- Aggiunto pulsante personalizzato -->
 
 <script>
 function isPrime(n) {
-  if (n <= 1) return false;
-  if (n <= 3) return true;
+  if (n <= 1) return false;
+  if (n <= 3) return true;
 
-  if (n % 2 === 0 || n % 3 === 0) return false;
+  if (n % 2 === 0 || n % 3 === 0) return false;
 
-  let i = 5;
-  while (i * i <= n) {
-    if (n % i === 0 || n % (i + 2) === 0) {
-      return false;
-    }
-    i += 6;
-  }
+  for (let i = 5; i * i <= n; i += 6) {
+    if (n % i === 0 || n % (i + 2) === 0) {
+      return false;
+    }
+  }
 
-  return true;
+  return true;
 }
 
-let numbers = [];
-for (let i = 1000; i < 2000; i++) {
-  numbers.push(i);
+function generateSquares() {
+  let numbers = [];
+  for (let i = 1000; i < 2000; i++) {
+    numbers.push(i);
+  }
+
+  let container = document.getElementById('container');
+  container.innerHTML = ''; // Pulisce il contenitore
+
+  for (let i = 0; i < 1000; i++) {
+    let square = document.createElement('div');
+    square.classList.add('square');
+
+    let number = numbers[i];
+    square.textContent = number;
+
+    if (number % 2 === 0) {
+      square.classList.add('red-dark');
+    } else {
+      square.classList.add('blue-light');
+    }
+
+    if (number % 7 === 0) {
+      square.classList.add('green');
+    }
+
+    if (isPrime(number)) {
+      square.classList.add('yellow');
+    }
+
+    container.appendChild(square);
+  }
 }
 
-let container = document.getElementById('container');
-
-for (let i = 0; i < 1000; i++) {
-  let square = document.createElement('div');
-  square.classList.add('square');
-
-  let number = numbers[i];
-  square.textContent = number;
-
-  if (number % 2 === 0) {
-    if (isPrime(number)) {
-      square.classList.add('quadratoYellow');
-    } else {
-      square.classList.add('quadratoRed');
-    }
-  } else {
-    if (number % 7 === 0) {
-      square.classList.add('quadratoGreen');
-    } else {
-      square.classList.add('quadratoBlue');
-    }
-  }
-
-  container.appendChild(square);
-}
 </script>
-
 </body>
 </html>
