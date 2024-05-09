@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+    .quadratoRed {
+      background-color: rgb(239, 143, 126);
+      color: rgb(3, 0, 0);
+      border: 2px solid black;
+      margin: 20px;
+      height: 20px;
+      width: 20px;
+      padding: 5px;
+    }
+    .quadratoBlue {
+      background-color: rgb(97, 119, 244);
+      color: rgb(6, 0, 0);
+      border: 2px solid black;
+      margin: 20px;
+      height: 20px;
+      width: 20px;
+      padding: 5px;
+    }
+    .quadratoGreen {
+      background-color: rgb(144, 238, 144);
+      color: rgb(3, 0, 0);
+      border: 2px solid black;
+      margin: 20px;
+      height: 20px;
+      width: 20px;
+      padding: 5px;
+    }
+    .quadratoYellow {
+      background-color: rgb(255, 255, 0);
+      color: rgb(3, 0, 0);
+      border: 2px solid black;
+      margin: 20px;
+      height: 20px;
+      width: 20px;
+      padding: 5px;
+    }
+</style>
+
+</head>
+<body>
+<div id="container" style="display: flex;"></div>
+
+<script>
+function isPrime(n) {
+  if (n <= 1) return false;
+  if (n <= 3) return true;
+
+  if (n % 2 === 0 || n % 3 === 0) return false;
+
+  let i = 5;
+  while (i * i <= n) {
+    if (n % i === 0 || n % (i + 2) === 0) {
+      return false;
+    }
+    i += 6;
+  }
+
+  return true;
+}
+
+let numbers = [];
+for (let i = 1000; i < 2000; i++) {
+  numbers.push(i);
+}
+
+let container = document.getElementById('container');
+
+for (let i = 0; i < 1000; i++) {
+  let square = document.createElement('div');
+  square.classList.add('square');
+
+  let number = numbers[i];
+  square.textContent = number;
+
+  if (number % 2 === 0) {
+    if (isPrime(number)) {
+      square.classList.add('quadratoYellow');
+    } else {
+      square.classList.add('quadratoRed');
+    }
+  } else {
+    if (number % 7 === 0) {
+      square.classList.add('quadratoGreen');
+    } else {
+      square.classList.add('quadratoBlue');
+    }
+  }
+
+  container.appendChild(square);
+}
+</script>
+
+</body>
+</html>
