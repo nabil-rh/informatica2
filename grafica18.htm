@@ -3,95 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numeri Primi</title>
+    <title>Generatore di Quadrati</title>
     <style>
         .square {
             width: 50px;
             height: 50px;
             margin: 5px;
-            display: inline-block;
-            text-align: center;
-            line-height: 50px;
-            border: 1px solid black;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            font-size: 14px;
+            font-weight: bold;
         }
-        .prime {
-            background-color: lightcoral;
-        }
-        .prime a {
-            color: inherit;
-            text-decoration: none;
-            display: block;
-            width: 100%;
-            height: 100%;
+        .blue {
+            background-color: blue;
+            color: white;
         }
     </style>
 </head>
 <body>
-    <div id="container"></div>
-
+    <h1>Generatore di Quadrati</h1>
+    <form id="squareForm">
+        <label for="number">Inserisci un numero:</label>
+        <input type="number" id="number" name="number" required>
+        <button type="submit">Genera</button>
+    </form>
+    <div id="squareContainer"></div>
 
     <script>
-        function isPrime(num) {
-            if (num <= 1) return false;
-            if (num === 2) return true;
-            for (let i = 2; i <= Math.sqrt(num); i++) {
-                if (num % i === 0) return false;
-            }
-            return true;
-        }
+        document.getElementById('squareForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const n = document.getElementById('number').value;
+            generateSquares(n);
+        });
 
-
-        function createPrimePage(num) {
-            const newWindow = window.open("", "_blank");
-            newWindow.document.write(`
-                <html>
-                    <head>
-                        <title>Prime Number</title>
-                        <style>
-                            body {
-                                font-size: 100px;
-                                color: red;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                height: 100vh;
-                                margin: 0;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        Prime Number: ${num}
-                    </body>
-                </html>
-            `);
-        }
-
-
-        function createSquares() {
-            const container = document.getElementById('container');
-
-
-            for (let i = 1; i <= 1000; i++) {
+        function generateSquares(n) {
+            const container = document.getElementById('squareContainer');
+            container.innerHTML = ''; // Pulisci il contenitore
+            for (let i = 0; i < n; i++) {
                 const square = document.createElement('div');
+                const randomNumber = getRandomNumber(100, 200);
                 square.className = 'square';
-                if (isPrime(i)) {
-                    square.classList.add('prime');
-                    const link = document.createElement('a');
-                    link.href = 'javascript:void(0);';
-                    link.textContent = i;
-                    link.onclick = () => createPrimePage(i);
-                    square.appendChild(link);
-                } else {
-                    square.textContent = i;
+                if (randomNumber % 10 === 0) {
+                    square.classList.add('blue');
                 }
-
-
+                square.textContent = randomNumber;
                 container.appendChild(square);
             }
         }
 
-
-        createSquares();
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
     </script>
 </body>
 </html>
+
