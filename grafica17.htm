@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +9,16 @@
             width: 50px;
             height: 50px;
             margin: 5px;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #000;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .blue {
             background-color: blue;
+            color: white;
         }
     </style>
 </head>
@@ -35,11 +43,19 @@
             container.innerHTML = ''; // Pulisci il contenitore
             for (let i = 0; i < n; i++) {
                 const square = document.createElement('div');
+                const randomNumber = getRandomNumber(100, 200);
                 square.className = 'square';
+                if (randomNumber % 10 === 0) {
+                    square.classList.add('blue');
+                }
+                square.textContent = randomNumber;
                 container.appendChild(square);
             }
+        }
+
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         }
     </script>
 </body>
 </html>
-
